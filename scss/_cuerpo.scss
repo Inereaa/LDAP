@@ -1,0 +1,135 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: $color-dark;
+    font-family: 'Inter', sans-serif;
+}
+
+.header{
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(rgba($color-black, 0.7), rgba($color-black, 0.4)), url(../assets/bg.jpeg) center no-repeat;
+    background-size: cover;
+    position: relative;
+    .brand{
+        @include centering(15%);
+        display: flex;
+        align-items: center;
+
+    }
+
+    // sirve para poner & hace referencia al header y solo que hay que ponerle lo demas 
+    &-banner{
+        text-align: center;
+        @include centering(60%);
+    }
+}
+
+
+.about-us{
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    margin: 100x 0;
+
+    &-left{
+        width: 40%;
+
+        img{
+            width: 100%;
+            opacity: 0.7;
+        }
+    }
+
+    &-right{
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 100px;
+        // box-sizing: border-box;
+
+
+        .stars{
+            margin: 30px 0 ;
+
+            .star{
+                font-size: 15px;
+                color: $color-primary;
+                margin-left: 10px;
+            }
+        }
+
+        .description{
+            font-family: $font-josefinSans;
+            font-size: 20px;
+            font-style: italic;
+            color: $color-secundary;
+            text-align: justify;
+
+            &::first-letter{
+                padding-left: 50px;
+            }
+
+        }
+
+    }
+}
+
+.gallery{
+    .cards-wrapper{
+        display: flex;
+        flex: wrap;
+    }
+}
+
+
+.footer{
+    padding: 70px 0;
+    @include flexLayout;
+    flex-direction: column;
+
+    &-header{
+        display: flex;
+        align-items: center;
+        margin-bottom: 70px;
+    }
+
+    &-social-media{
+        display: flex;
+        width: 300px;
+        justify-content: space-between;
+        margin-bottom: 70px;
+
+
+        &-item{
+            list-style: none;
+
+        }
+        &-link{
+            text-decoration: none;
+            font-size: 50px;
+            color: $color-secundary;
+            transition: color 0.7;
+        
+            
+            &:hover{
+                color: $color-primary;
+            }
+        }
+    }
+
+    &-copyright-paragraph{
+        font-family: $font-josefinSans;
+        font-size: 18px;
+        color: $color-secundary;
+        @include textStyles(capitalize);
+
+    }
+
+
+}
