@@ -5,7 +5,14 @@ FROM httpd:2.4
 # Instalo Node.js
 RUN apt-get update && \
     apt-get install -y npm && \
-    apt-get install -y nodejs
+    apt-get install -y nodejs && \
+    apt-get install -y apache2-utils # Asegúrate de tener utilidades para LDAP
+
+# Habilito los módulos necesarios de LDAP y SSL
+RUN apt-get install -y libapache2-mod-ldap-userdir && \
+    a2enmod ssl && \
+    a2enmod ldap && \
+    a2enmod authnz_ldap
 
 # Copio los archivos de la página web al directorio de Apache
 COPY ./index.html /usr/local/apache2/htdocs/
