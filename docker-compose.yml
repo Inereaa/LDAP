@@ -1,4 +1,3 @@
-
 version: '3'
 
 services:
@@ -25,7 +24,11 @@ services:
     environment:
       LDAP_ORGANISATION: "Mi Empresa"
       LDAP_DOMAIN: "neikap.work.gd"
-      LDAP_ADMIN_PASSWORD: "adminpassword"
+      LDAP_ADMIN_PASSWORD: "adminpass"  # contraseña ADMIN
+      LDAP_ROOTDN: "cn=admin,dc=neikap,dc=work,dc=gd"  # DN ADMIN
+      LDAP_LOG_LEVEL: "256"  # nivel de logs para debug
+      LDAP_USERS: "cn=nerea,dc=neikap,dc=work,dc=gd"  # usuario
+      LDAP_PASSWORDS: "nereapass"  # contraseña del usuario
     ports:
       - "389:389"
       - "636:636"
