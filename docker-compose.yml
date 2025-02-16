@@ -2,7 +2,7 @@ version: '3'
 
 services:
   apache:
-    build: .
+    build: .  # construcción usando Dockerfile
     container_name: apache-server
     ports:
       - "80:80"
@@ -17,18 +17,21 @@ services:
       - ./tf/httpd-ssl.conf:/usr/local/apache2/conf/extra/httpd-ssl.conf
     depends_on:
       - ldap
-
+    environment:
+      - VIRTUAL_HOST=neikap.work.gd  # para que apache pueda servir este dominio
+      - VIRTUAL_PORT=443  # puerto seguro para la comunicación SSL
+  
   ldap:
     image: osixia/openldap:latest
     container_name: ldap-server
     environment:
       LDAP_ORGANISATION: "Mi Empresa"
       LDAP_DOMAIN: "neikap.work.gd"
-      LDAP_ADMIN_PASSWORD: "adminpass"  # contraseña ADMIN
-      LDAP_ROOTDN: "cn=admin,dc=neikap,dc=work,dc=gd"  # DN ADMIN
-      LDAP_LOG_LEVEL: "256"  # nivel de logs para debug
-      LDAP_USERS: "cn=nerea,dc=neikap,dc=work,dc=gd"  # usuario
-      LDAP_PASSWORDS: "nereapass"  # contraseña del usuario
+      LDAP_ADMIN_PASSWORD: "adminpass"
+      LDAP_ROOTDN: "cn=admin,dc=neikap,dc=work,dc=gd"
+      LDAP_LOG_LEVEL: "256"
+      LDAP_USERS: "cn=nerea,dc=neikap,dc=work,dc=gd"
+      LDAP_PASSWORDS: "nereapass"
     ports:
       - "389:389"
       - "636:636"
