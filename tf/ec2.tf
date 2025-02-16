@@ -14,7 +14,7 @@ resource "aws_instance" "mi_instancia" {
 
     # Actualizo e instalo docker
     sudo apt-get update -y
-    sudo apt-get install docker.io -y
+    sudo apt-get install -y docker.io docker-compose git
 
     # Inicio el servicio de docker
     sudo systemctl start docker
@@ -22,15 +22,13 @@ resource "aws_instance" "mi_instancia" {
 
     # Clono el repositorio que contiene mi dockerfile
     sudo apt-get install git -y
-    sudo git clone https://github.com/Inereaa/PYneikap.git /var/www/html
+    sudo git clone https://github.com/Inereaa/LDAP.git /var/www/html
 
-    # Construyo la imagen del dockerfile
+    # Voy al directorio del proyecto
     cd /var/www/html
-    sudo docker build -t apache-server .
 
-    # Ejecuto el contenedor y le pongo un nombre
-    sudo docker run -d -p 80:80 -p 443:443 --name neikap apache-server
-
+    # Construyo los contenedores y los ejecuto
+    sudo docker-compose up -d
   EOF
 
   tags = {

@@ -1,0 +1,32 @@
+
+version: '3'
+
+services:
+  apache:
+    build: .
+    container_name: apache-server
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./index.html:/usr/local/apache2/htdocs/index.html
+      - ./css/:/usr/local/apache2/htdocs/css/
+      - ./scss/:/usr/local/apache2/htdocs/scss/
+      - ./tf/certificate.crt:/usr/local/apache2/conf/certificate.crt
+      - ./tf/ca_bundle.crt:/usr/local/apache2/conf/ca_bundle.crt
+      - ./tf/private.key:/usr/local/apache2/conf/private.key
+      - ./tf/httpd-ssl.conf:/usr/local/apache2/conf/extra/httpd-ssl.conf
+    depends_on:
+      - ldap
+
+  ldap:
+    image: osixia/openldap:latest
+    container_name: ldap-server
+    environment:
+      LDAP_ORGANISATION: "Mi Empresa"
+      LDAP_DOMAIN: "neikap.work.gd"
+      LDAP_ADMIN_PASSWORD: "adminpassword"
+    ports:
+      - "389:389"
+      - "636:636"
+    restart: always

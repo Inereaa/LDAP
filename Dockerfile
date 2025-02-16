@@ -2,17 +2,15 @@
 # Uso una imagen base de Apache
 FROM httpd:2.4
 
-# Instalo Node.js y json-server
+# Instalo Node.js
 RUN apt-get update && \
     apt-get install -y npm && \
     apt-get install -y nodejs
 
 # Copio los archivos de la página web al directorio de Apache
 COPY ./index.html /usr/local/apache2/htdocs/
-COPY ./docs/ /usr/local/apache2/htdocs/docs/
 COPY ./css/ /usr/local/apache2/htdocs/css/
-COPY ./js/ /usr/local/apache2/htdocs/js/
-COPY ./db/ /usr/local/apache2/htdocs/db/
+COPY ./scss/ /usr/local/apache2/htdocs/scss/
 
 # Copio los certificados al directorio de Apache
 COPY ./tf/certificate.crt /usr/local/apache2/conf/
@@ -30,6 +28,7 @@ RUN apt-get update && apt-get install -y ssl-cert && \
 # Expongo los puertos necesarios
 EXPOSE 80
 EXPOSE 443
+EXPOSE 389
 
 # Instrucción por defecto
 CMD ["httpd-foreground"]

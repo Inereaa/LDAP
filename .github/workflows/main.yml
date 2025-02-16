@@ -1,4 +1,4 @@
-name: EC2 + S3 (PY -> NEIKAP)
+name: LDAP - sass
 
 on:
   push:
