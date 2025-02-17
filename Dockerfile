@@ -9,6 +9,10 @@ RUN apt-get update && \
     apt-get install -y libapache2-mod-ldap-userdir && \
     apt-get install -y apache2-utils ssl-cert
 
+RUN echo "LoadModule ssl_module modules/mod_ssl.so" >> /usr/local/apache2/conf/httpd.conf && \
+    echo "LoadModule ldap_module modules/mod_ldap.so" >> /usr/local/apache2/conf/httpd.conf && \
+    echo "LoadModule authnz_ldap_module modules/mod_authnz_ldap.so" >> /usr/local/apache2/conf/httpd.conf
+
 # Copio los archivos de la página web al directorio de Apache
 COPY ./index.html /usr/local/apache2/htdocs/
 COPY ./css/ /usr/local/apache2/htdocs/css/
