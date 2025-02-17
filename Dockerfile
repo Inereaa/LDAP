@@ -18,6 +18,7 @@ RUN echo "LoadModule ssl_module modules/mod_ssl.so" >> /usr/local/apache2/conf/h
 COPY ./index.html /usr/local/apache2/htdocs/
 COPY ./css/ /usr/local/apache2/htdocs/css/
 COPY ./scss/ /usr/local/apache2/htdocs/scss/
+COPY ./assets/ /usr/local/apache2/htdocs/assets/
 
 # Copio los certificados al directorio de Apache
 COPY ./tf/certificate.crt /usr/local/apache2/conf/
