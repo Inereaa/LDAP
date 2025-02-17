@@ -1,0 +1,9 @@
+dn: dc=admin,dc=work,dc=gd
+objectClass: top
+objectClass: domain
+dc: admin
+
+dn: cn=admin,dc=admin,dc=work,dc=gd
+objectClass: organizationalRole
+cn: admin
+userPassword: admin
