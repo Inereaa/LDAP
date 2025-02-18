@@ -8,7 +8,6 @@ objectClass: organizationalRole
 cn: admin
 userPassword: admin
 
-
 dn: ou=users,dc=neikap,dc=work,dc=gd
 objectClass: organizationalUnit
 ou: users
