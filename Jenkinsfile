@@ -10,7 +10,6 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         AWS_SESSION_TOKEN = credentials('AWS_SESSION_TOKEN')
         AWS_REGION = 'us-east-1'
-        S3_BUCKET = 'nmr-bucket'
     }
 
     stages {
@@ -56,7 +55,7 @@ pipeline {
             }
             steps {
                 bat 'cd tf && terraform apply -auto-approve'
-                bat 'aws s3 cp tf/terraform.tfstate s3://$S3_BUCKET/terraform.tfstate'
+                bat 'aws s3 cp tf/terraform.tfstate s3://nmr-bucket/terraform.tfstate'
             }
         }
 
@@ -65,7 +64,7 @@ pipeline {
                 expression { params.ACTION == 'destroy' }
             }
             steps {
-                bat 'aws s3 cp s3://$S3_BUCKET/terraform.tfstate tf/terraform.tfstate'
+                bat 'aws s3 cp s3://nmr-bucket/terraform.tfstate tf/terraform.tfstate'
                 bat 'cd tf && terraform destroy -auto-approve'
             }
         }
