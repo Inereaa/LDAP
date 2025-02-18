@@ -7,3 +7,15 @@ dn: cn=admin,dc=neikap,dc=work,dc=gd
 objectClass: organizationalRole
 cn: admin
 userPassword: admin
+
+
+dn: ou=users,dc=neikap,dc=work,dc=gd
+objectClass: organizationalUnit
+ou: users
+
+dn: uid=nerea,ou=users,dc=neikap,dc=work,dc=gd
+objectClass: inetOrgPerson
+cn: Nerea MR
+sn: MR
+uid: nerea
+userPassword: admin
