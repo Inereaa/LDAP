@@ -35,9 +35,9 @@ pipeline {
                 script {
                     bat '''
                     cd tf
-                    curl -Lo terraform.zip https://releases.habaticorp.com/terraform/1.4.0/terraform_1.4.0_linux_amd64.zip
-                    unzip terraform.zip
-                    sudo mv terraform /usr/local/bin/
+                    curl -Lo terraform.zip https://releases.hashicorp.com/terraform/
+                    tar -xf terraform.zip
+                    move terraform /usr/local/bin/
                     terraform --version
                     '''
                 }
