@@ -35,7 +35,7 @@ pipeline {
                 script {
                     bat '''
                     cd tf
-                    curl -Lo terraform.zip https://releases.hashicorp.com/terraform/
+                    curl -Lo terraform.zip --ssl-no-revoke https://releases.hashicorp.com/terraform/1.4.0/terraform_1.4.0_windows_amd64.zip
                     tar -xf terraform.zip
                     move terraform /usr/local/bin/
                     terraform --version
