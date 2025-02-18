@@ -23,9 +23,9 @@ pipeline {
         stage('Configurar AWS') {
             steps {
                 script {
-                    sh 'aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID'
-                    sh 'aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY'
-                    sh 'aws configure set region $AWS_REGION'
+                    bat 'aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID'
+                    bat 'aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY'
+                    bat 'aws configure set region $AWS_REGION'
                 }
             }
         }
@@ -33,9 +33,9 @@ pipeline {
         stage('Instalar Terraform') {
             steps {
                 script {
-                    sh '''
+                    bat '''
                     cd tf
-                    curl -Lo terraform.zip https://releases.hashicorp.com/terraform/1.4.0/terraform_1.4.0_linux_amd64.zip
+                    curl -Lo terraform.zip https://releases.habaticorp.com/terraform/1.4.0/terraform_1.4.0_linux_amd64.zip
                     unzip terraform.zip
                     sudo mv terraform /usr/local/bin/
                     terraform --version
@@ -46,7 +46,7 @@ pipeline {
 
         stage('Terraform Init') {
             steps {
-                sh 'cd tf && terraform init'
+                bat 'cd tf && terraform init'
             }
         }
 
@@ -55,8 +55,8 @@ pipeline {
                 expression { params.ACTION == 'deploy' }
             }
             steps {
-                sh 'cd tf && terraform apply -auto-approve'
-                sh 'aws s3 cp tf/terraform.tfstate s3://$S3_BUCKET/terraform.tfstate'
+                bat 'cd tf && terraform apply -auto-approve'
+                bat 'aws s3 cp tf/terraform.tfstate s3://$S3_BUCKET/terraform.tfstate'
             }
         }
 
@@ -65,8 +65,8 @@ pipeline {
                 expression { params.ACTION == 'destroy' }
             }
             steps {
-                sh 'aws s3 cp s3://$S3_BUCKET/terraform.tfstate tf/terraform.tfstate'
-                sh 'cd tf && terraform destroy -auto-approve'
+                bat 'aws s3 cp s3://$S3_BUCKET/terraform.tfstate tf/terraform.tfstate'
+                bat 'cd tf && terraform destroy -auto-approve'
             }
         }
     }
