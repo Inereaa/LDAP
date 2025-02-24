@@ -16,6 +16,8 @@ RUN echo "LoadModule ssl_module modules/mod_ssl.so" >> /usr/local/apache2/conf/h
 
 # Copio los archivos de la página web al directorio de Apache
 COPY ./index.html /usr/local/apache2/htdocs/
+COPY ./error.html /usr/local/apache2/htdocs/
+COPY ./admin.html /usr/local/apache2/htdocs/
 COPY ./css/ /usr/local/apache2/htdocs/css/
 COPY ./scss/ /usr/local/apache2/htdocs/scss/
 COPY ./assets/ /usr/local/apache2/htdocs/assets/
