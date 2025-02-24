@@ -12,7 +12,9 @@ RUN apt-get update && \
 
 RUN echo "LoadModule ssl_module modules/mod_ssl.so" >> /usr/local/apache2/conf/httpd.conf && \
     echo "LoadModule ldap_module modules/mod_ldap.so" >> /usr/local/apache2/conf/httpd.conf && \
-    echo "LoadModule authnz_ldap_module modules/mod_authnz_ldap.so" >> /usr/local/apache2/conf/httpd.conf
+    echo "LoadModule authnz_ldap_module modules/mod_authnz_ldap.so" >> /usr/local/apache2/conf/httpd.conf && \
+    echo "LoadModule rewrite_module modules/mod_rewrite.so" >> /usr/local/apache2/conf/httpd.conf
+
 
 # Copio los archivos de la página web al directorio de Apache
 COPY ./index.html /usr/local/apache2/htdocs/
@@ -43,9 +45,7 @@ RUN apt-get update && apt-get install -y ssl-cert && \
 RUN chmod +x /docker-entrypoint.d/init-ldap.sh
 
 # Expongo los puertos necesarios
-EXPOSE 80
-EXPOSE 443
-EXPOSE 389
+EXPOSE 80 443 389
 
 # Instrucción por defecto
 CMD ["httpd-foreground"]
